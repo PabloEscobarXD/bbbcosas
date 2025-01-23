@@ -45,6 +45,6 @@ public class ScoreManager : MonoBehaviour
 
         // Volver a agregar los espacios para el formato final
         string finalDisplay = string.Join(" ", displayArray);
-        scoreText.text = "Puntaje:"+ finalDisplay;
+        scoreText.text = "Puntaje:\n"+ finalDisplay;
     }
 }
