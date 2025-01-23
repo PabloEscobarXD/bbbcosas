@@ -7,14 +7,24 @@ public class bomb_slow : MonoBehaviour
 
 
     //velocidad
-    public float speed = 0.1f;
+    public float speed = 0.5f;
+
+    public bool initState = false; //para calcular la posicion al espawnear
+    Vector3 direction; //direccion del jugador
+
 
     void Update()
     {
         if (circle != null)
         {
+            
             //calcular direccion
-            Vector3 direction = (circle.position - transform.position).normalized;
+            if (!initState)
+            {
+                direction = (circle.position - transform.position).normalized;
+                initState = true;
+            }
+            
             //moverse
             transform.position += direction * speed * Time.deltaTime;
         }
