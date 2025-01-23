@@ -50,7 +50,6 @@ public class BubbleSpawner : MonoBehaviour
     {
         while (bubble != null)
         {
-            Debug.Log("pepe");
             Vector3 viewportPos = maincamera.WorldToViewportPoint(bubble.transform.position);
             if (viewportPos.y > 1 || viewportPos.x < 0 || viewportPos.x > 1 || viewportPos.y < -5)
             {
