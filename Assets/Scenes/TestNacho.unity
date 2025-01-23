@@ -164,10 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40971450a3a208e46b0a020d2c307481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 117769783}
-  hook: {fileID: 2245914959431610738, guid: 0a467dde6264284478c6bd8c65274c7a, type: 3}
   playerSpeed: 3
-  isShooting: 0
 --- !u!212 &117769786
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -870,6 +867,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 117769784}
   radius: 4
+  minRadius: 1
+  maxRadius: 3
+  adjustmentSpeed: 5
 --- !u!212 &731765116
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1046,7 +1046,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 683, y: 399}
+  m_AnchoredPosition: {x: 226, y: 157}
   m_SizeDelta: {x: 232.7194, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &880525274
@@ -1184,7 +1184,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 672, y: 383.30957}
+  m_AnchoredPosition: {x: 215, y: 141.30959}
   m_SizeDelta: {x: 281.5448, y: 109.3807}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &909284307
@@ -1388,7 +1388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
