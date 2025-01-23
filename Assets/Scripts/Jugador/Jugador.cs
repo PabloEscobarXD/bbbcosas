@@ -1,34 +1,22 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Jugador : MonoBehaviour
 {
-    public GameObject player, hook;
-    public float playerSpeed;
-    public bool isShooting;
-    private HookBehaviour HookBehaviourScript;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public float playerSpeed = 5f; // Velocidad del jugador
     void Start()
     {
-        player.transform.position = new Vector2(0,0);
+        transform.position = Vector2.zero;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        // Movimiento del jugador
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        player.transform.Translate(new Vector2(horizontalInput, verticalInput)* playerSpeed * Time.deltaTime);
-
-        if(Input.GetKeyDown(KeyCode.Mouse0) && !isShooting)
-        {
-            isShooting = true;
-            Instantiate(hook);
-        }
+        transform.Translate(new Vector2(horizontalInput, verticalInput) * playerSpeed * Time.deltaTime);
     }
-    void Shoot()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        Debug.Log("COLISION");
     }
 }
