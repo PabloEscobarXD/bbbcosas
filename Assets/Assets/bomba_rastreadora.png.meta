@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bomba_rastreadora_0: 6859459127867386271
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

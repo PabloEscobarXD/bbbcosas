@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bomba_estacionaria_0: -448900431476883410
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
