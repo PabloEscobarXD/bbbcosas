@@ -55,6 +55,8 @@ public class Bombs : MonoBehaviour
 
         // Destruir la bomba actual.
         Destroy(gameObject);
+        TestCombo.points += 10;
+        Debug.Log("a: " + TestCombo.points);
 
         // Si la colisión proviene de otra bomba, crea una explosión adicional en la posición de la bomba colisionada.
         if (collision != null)
@@ -65,6 +67,8 @@ public class Bombs : MonoBehaviour
             {
                 otherExplosionScript.SetAffectedBombTag(collision.gameObject.tag);
                 otherExplosionScript.SetExplosionScale(scaleMultiplier);  // Establecer la escala de la explosión
+                //TestCombo.points++;
+                Debug.Log("a: " + TestCombo.points);
             }
 
             Destroy(collision.gameObject);

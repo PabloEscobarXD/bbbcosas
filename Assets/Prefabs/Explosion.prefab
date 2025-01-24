@@ -147,3 +147,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b584ddabacb96419cb2876ba7b3eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreManager: {fileID: 0}
+  floatingTextPrefab: {fileID: 4672624135531839543, guid: 670d5196f9e6fce4282abdab9514e9a0, type: 3}

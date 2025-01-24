@@ -105,6 +105,8 @@ MonoBehaviour:
   isAttachedToHook: 0
   explosionPrefab: {fileID: 1183978469746767123, guid: 9a53fd8797995a247824d3c38d604628, type: 3}
   hook: {fileID: 6843340530087886228, guid: f3c4c2ac4b8278f4e984fb45062bc1de, type: 3}
+  TestComboScript: {fileID: 1183978469746767123, guid: 9a53fd8797995a247824d3c38d604628, type: 3}
+  puntajesScript: {fileID: 6205072466382912269, guid: 5e8d083ee67a02b4c9182a1dba5bebd7, type: 3}
 --- !u!61 &-9167824774554658237
 BoxCollider2D:
   m_ObjectHideFlags: 0

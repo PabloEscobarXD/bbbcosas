@@ -7,9 +7,15 @@ public class TestCombo : MonoBehaviour
     public ScoreManager scoreManager; // Referencia al ScoreManager
     public GameObject explosionPrefab; // Prefab de la explosión (GIF o sprite)
     public GameObject floatingTextPrefab; // Prefab del texto flotante
+    static public int points = 0; // Cantidad de puntos que se suman
+    static public int multiCombo = 1;
+    private int auxpoint = 0;
+    static public bool isComboEnded;
+    
 
     void Start()
     {
+        isComboEnded = false;
         if (scoreManager == null)
         {
             // Buscar automáticamente el ScoreManager en la escena si no está asignado
@@ -23,17 +29,26 @@ public class TestCombo : MonoBehaviour
 
     void Update()
     {
+        //int auxpoint = 0;
         // Si se presiona la tecla E, sumar puntos, generar explosión y texto flotante
-        if (Input.GetKeyDown(KeyCode.E))
+        // Sumar puntos al puntaje total
+
+        if (points > auxpoint)
         {
-            if (scoreManager != null)
-            {
-                int points = 10; // Cantidad de puntos que se suman
-                scoreManager.AddScore(points); // Sumar puntos al puntaje total
-                SpawnExplosion(); // Generar explosión
-                SpawnFloatingText(points); // Generar el texto flotante
-            }
+            int deltaPoints = points - auxpoint; // Calcula la diferencia de puntos
+            deltaPoints = deltaPoints * multiCombo;
+
+            scoreManager.AddScore(deltaPoints); // Suma solo la diferencia al puntaje
+            auxpoint = points; // Actualiza `auxpoint` al nuevo valor de `points`
+            
+
+            // Opcional: Generar explosión o texto flotante
+            //SpawnExplosion();
+            //SpawnFloatingText(deltaPoints);
+            isComboEnded = false;
         }
+        //SpawnExplosion(); // Generar explosión
+        //SpawnFloatingText(points); // Generar el texto flotante
     }
 
     private void SpawnExplosion()

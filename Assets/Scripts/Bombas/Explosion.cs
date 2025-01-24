@@ -1,21 +1,25 @@
 using UnityEngine;
+using TMPro;
 
 public class Explosion : MonoBehaviour
 {
     private string affectedBombTag;
-    private static float explosionScaleMultiplier = 1f;  // Multiplicador para el tamaño de las explosiones
-    private static int consecutiveExplosions = 0;       // Cantidad de explosiones consecutivas
-    private static float timeSinceLastExplosion = 0f;   // Tiempo desde la última explosión
-    private const int maxConsecutiveExplosions = 7;     // Máximo número de explosiones consecutivas antes de limitar el tamaño
-    private const float explosionResetTime = 3f;        // Tiempo para reiniciar el tamaño de las explosiones
+    private static float explosionScaleMultiplier = 1f; // Multiplicador para el tamaño de las explosiones
+    private static int consecutiveExplosions = 0;      // Cantidad de explosiones consecutivas
+    private static float timeSinceLastExplosion = 0f;  // Tiempo desde la última explosión
+    private const int maxConsecutiveExplosions = 7;    // Máximo número de explosiones consecutivas antes de limitar el tamaño
+    private const float explosionResetTime = 3f;       // Tiempo para reiniciar el tamaño de las explosiones
 
-    // Establece el tag de las bombas afectadas por esta explosión
+    public ScoreManager scoreManager; // Referencia al ScoreManager
+    public GameObject floatingTextPrefab; // Prefab del texto flotante
+
+    private int pointsPerExplosion = 10; // Puntos por explosión
+
     public void SetAffectedBombTag(string bombTag)
     {
         affectedBombTag = bombTag;
     }
 
-    // Establece el tamaño (escala) de la explosión
     public void SetExplosionScale(float scale)
     {
         transform.localScale = new Vector3(scale, scale, 1f);
@@ -32,9 +36,16 @@ public class Explosion : MonoBehaviour
         // Incrementa las explosiones consecutivas y ajusta el tamaño
         if (consecutiveExplosions < maxConsecutiveExplosions)
         {
+            TestCombo.multiCombo++;
             explosionScaleMultiplier += 0.3f;
         }
         consecutiveExplosions++;
+
+        // Añadir puntos al puntaje
+        AddPoints(pointsPerExplosion);
+
+        // Mostrar texto flotante
+        SpawnFloatingText(pointsPerExplosion);
     }
 
     private void Update()
@@ -46,6 +57,7 @@ public class Explosion : MonoBehaviour
         if (timeSinceLastExplosion >= explosionResetTime)
         {
             ResetExplosionScale();
+            
         }
     }
 
@@ -61,17 +73,50 @@ public class Explosion : MonoBehaviour
         }
     }
 
-    // Para obtener el multiplicador de escala en cualquier momento
+    private void AddPoints(int points)
+    {
+        if (scoreManager != null)
+        {
+            scoreManager.AddScore(points);
+        }
+        else
+        {
+            Debug.LogError("ScoreManager no está asignado en Explosion.");
+        }
+    }
+
+    private void SpawnFloatingText(int points)
+    {
+        if (floatingTextPrefab != null)
+        {
+            Vector3 spawnPosition = transform.position + Vector3.up * 1.1f;
+
+            GameObject floatingTextInstance = Instantiate(floatingTextPrefab, spawnPosition, Quaternion.identity);
+
+            TextMeshPro textMesh = floatingTextInstance.GetComponent<TextMeshPro>();
+            if (textMesh != null)
+            {
+                textMesh.text = "+" + points + "pts";
+            }
+
+            Destroy(floatingTextInstance, 2f); // Destruir el texto después de un tiempo fijo
+        }
+        else
+        {
+            Debug.LogError("FloatingTextPrefab no está asignado en Explosion.");
+        }
+    }
+
     public static float GetExplosionScaleMultiplier()
     {
         return explosionScaleMultiplier;
     }
 
-    // Reinicia el tamaño de las explosiones y el contador
     public static void ResetExplosionScale()
     {
-        explosionScaleMultiplier = 1f;    // Reinicia el tamaño base de las explosiones
-        consecutiveExplosions = 0;       // Reinicia el contador de explosiones consecutivas
-        timeSinceLastExplosion = 0f;     // Reinicia el temporizador
+        explosionScaleMultiplier = 1f;
+        consecutiveExplosions = 0;
+        timeSinceLastExplosion = 0f;
+        TestCombo.multiCombo = 1;
     }
 }
