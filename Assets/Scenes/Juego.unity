@@ -889,7 +889,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -1560,6 +1560,10 @@ PrefabInstance:
       propertyPath: currentHook
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3267459878553399973, guid: ba4858756e1d7c146b441dbd8088b014, type: 3}
+      propertyPath: burbujaPrefab
+      value: 
+      objectReference: {fileID: 2139052071}
     - target: {fileID: 6541341379050364446, guid: ba4858756e1d7c146b441dbd8088b014, type: 3}
       propertyPath: m_Name
       value: Circle
@@ -2566,6 +2570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1866271408}
+  scoreSpeed: 50
 --- !u!114 &1114182748
 MonoBehaviour:
   m_ObjectHideFlags: 0

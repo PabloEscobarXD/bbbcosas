@@ -7,7 +7,7 @@ public class sceneManager : MonoBehaviour
 
     public void cambiarScene(string nombre)
     {
-        audioManager.Instance.reproducir(clickSonido);
+        //audioManager.Instance.reproducir(clickSonido);
         SceneManager.LoadScene(nombre);
     }
 
