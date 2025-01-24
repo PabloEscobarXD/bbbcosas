@@ -1032,6 +1032,14 @@ PrefabInstance:
       propertyPath: burbujaPrefab
       value: 
       objectReference: {fileID: 963793474}
+    - target: {fileID: 3267459878553399973, guid: ba4858756e1d7c146b441dbd8088b014, type: 3}
+      propertyPath: tiempoDesvanecer
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267459878553399973, guid: ba4858756e1d7c146b441dbd8088b014, type: 3}
+      propertyPath: velocidadBurbuja
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6541341379050364446, guid: ba4858756e1d7c146b441dbd8088b014, type: 3}
       propertyPath: m_Name
       value: Circle
