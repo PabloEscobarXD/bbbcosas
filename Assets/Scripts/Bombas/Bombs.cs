@@ -7,6 +7,7 @@ public class Bombs : MonoBehaviour
     private float explosionRadius = 3f;
     public bool isAttachedToHook;
     public GameObject explosionPrefab, hook;
+    public GameObject explosionPrefab2; // Prefab de la explosión (GIF o sprite)
     public AudioClip explosionAudio;
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -30,8 +31,25 @@ public class Bombs : MonoBehaviour
 
     public void Explode(Collision2D collision)
     {
-        // Crear la explosión en la posición actual.
-        GameObject explosionInstance = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+        // Obtener la posición del objeto actual o un lugar específico
+        Vector3 spawnPosition = transform.position; // Coloca donde quieras que aparezca la explosión
+
+        // Instanciar la explosión en la posición
+        GameObject explosionInstance = Instantiate(explosionPrefab, spawnPosition, Quaternion.identity);
+
+        // Destruir la explosión después de que termine su animación (suponiendo que tenga un Animator)
+        Animator explosionAnimator = explosionInstance.GetComponent<Animator>();
+        if (explosionAnimator != null)
+        {
+            // Esperar hasta que termine la animación de la explosión (dependiendo de la duración)
+            Destroy(explosionInstance, explosionAnimator.GetCurrentAnimatorStateInfo(0).length);
+        }
+        else
+        {
+            // Si no tiene un Animator, puedes destruirla después de un tiempo fijo (por ejemplo, 2 segundos)
+            Destroy(explosionInstance, 2f);
+        }
 
         // Obtener el multiplicador de escala de la explosión
         float scaleMultiplier = Explosion.GetExplosionScaleMultiplier();

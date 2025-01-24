@@ -5,7 +5,7 @@ using UnityEngine.SocialPlatforms.Impl;
 public class TestCombo : MonoBehaviour
 {
     public ScoreManager scoreManager; // Referencia al ScoreManager
-    public GameObject explosionPrefab; // Prefab de la explosión (GIF o sprite)
+    //public GameObject explosionPrefab; // Prefab de la explosión (GIF o sprite)
     public GameObject floatingTextPrefab; // Prefab del texto flotante
     static public int points = 0; // Cantidad de puntos que se suman
     static public int multiCombo = 1;
@@ -61,40 +61,10 @@ public class TestCombo : MonoBehaviour
             scoreManager.AddScore(deltaPoints); // Suma solo la diferencia al puntaje
             
             auxpoint = points; // Actualiza `auxpoint` al nuevo valor de `points`
-            
-
-            // Opcional: Generar explosión o texto flotante
-            //SpawnExplosion();
-            //SpawnFloatingText(deltaPoints);
             isComboEnded = false;
         }
         //SpawnExplosion(); // Generar explosión
         //SpawnFloatingText(points); // Generar el texto flotante
-    }
-
-    private void SpawnExplosion()
-    {
-        if (explosionPrefab != null)
-        {
-            // Obtener la posición del objeto actual o un lugar específico
-            Vector3 spawnPosition = transform.position; // Coloca donde quieras que aparezca la explosión
-
-            // Instanciar la explosión en la posición
-            GameObject explosionInstance = Instantiate(explosionPrefab, spawnPosition, Quaternion.identity);
-
-            // Destruir la explosión después de que termine su animación (suponiendo que tenga un Animator)
-            Animator explosionAnimator = explosionInstance.GetComponent<Animator>();
-            if (explosionAnimator != null)
-            {
-                // Esperar hasta que termine la animación de la explosión (dependiendo de la duración)
-                Destroy(explosionInstance, explosionAnimator.GetCurrentAnimatorStateInfo(0).length);
-            }
-            else
-            {
-                // Si no tiene un Animator, puedes destruirla después de un tiempo fijo (por ejemplo, 2 segundos)
-                Destroy(explosionInstance, 2f);
-            }
-        }
     }
 
     private void SpawnFloatingText(int points)

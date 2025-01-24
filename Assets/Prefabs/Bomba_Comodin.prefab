@@ -107,6 +107,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 1183978469746767123, guid: 9a53fd8797995a247824d3c38d604628, type: 3}
   hook: {fileID: 6843340530087886228, guid: f3c4c2ac4b8278f4e984fb45062bc1de, type: 3}
   explosionAudio: {fileID: 8300000, guid: 85bb3a9d1c6b3844fa38971ad4ac3e3e, type: 3}
+  explosionAnimator: {fileID: 7846436376907625386, guid: 610b1a5c8c6f1b74bac5231253cde357, type: 3}
 --- !u!61 &8799392165404940245
 BoxCollider2D:
   m_ObjectHideFlags: 0

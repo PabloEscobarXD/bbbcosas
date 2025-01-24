@@ -8,7 +8,8 @@ public class Explosion : MonoBehaviour
     private static int consecutiveExplosions = 0;      // Cantidad de explosiones consecutivas
     private static float timeSinceLastExplosion = 0f;  // Tiempo desde la última explosión
     private const int maxConsecutiveExplosions = 7;    // Máximo número de explosiones consecutivas antes de limitar el tamaño
-    private const float explosionResetTime = 3f;       // Tiempo para reiniciar el tamaño de las explosiones
+    private const float explosionResetTime = 1.5f;       // Tiempo para reiniciar el tamaño de las explosiones
+    public GameObject explosionPrefab; // Prefab de la explosión (GIF o sprite)
 
     public ScoreManager scoreManager; // Referencia al ScoreManager
     public GameObject floatingTextPrefab; // Prefab del texto flotante
@@ -28,7 +29,7 @@ public class Explosion : MonoBehaviour
     private void Start()
     {
         // Destruye la explosión después de 1 segundo
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 0.5f);
 
         // Resetea el temporizador porque ocurrió una explosión
         timeSinceLastExplosion = 0f;
