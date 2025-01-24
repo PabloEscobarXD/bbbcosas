@@ -1,9 +1,9 @@
-using Unity.VisualScripting;
+Ôªøusing Unity.VisualScripting;
 using UnityEngine;
 
 public class Gancho : MonoBehaviour
 {
-    public GameObject player, mira, camara; // Referencia al jugador y a la mira (retÌcula).
+    public GameObject player, mira, camara; // Referencia al jugador y a la mira (ret√≠cula).
     public float hookSpeed = 10f; // Velocidad del gancho.
     public float returnSpeed = 15f; // Velocidad al regresar al jugador.
     public float followDelay = 0.2f; // Retraso al seguir la mira.
@@ -11,9 +11,9 @@ public class Gancho : MonoBehaviour
 
     private Vector2 hookDirection;
     private GameObject attachedBomb; // Referencia a la bomba acoplada.
-    private bool isReturning; // Si el gancho est· regresando al jugador.
+    private bool isReturning; // Si el gancho est√° regresando al jugador.
     private Vector3 returnTarget; // Objetivo al que regresa el gancho.
-    private Vector3 hookSmoothPosition; // PosiciÛn suavizada del gancho.
+    private Vector3 hookSmoothPosition; // Posici√≥n suavizada del gancho.
 
     void Start()
     {
@@ -21,13 +21,13 @@ public class Gancho : MonoBehaviour
         isAttached = false; //Agarrado
         isReleased = true;  //Soltado
         attachedBomb = null;
-        isReturning = false; // Inicialmente, no est· regresando.
-        hookSmoothPosition = transform.position; // Inicializa la posiciÛn suavizada.
+        isReturning = false; // Inicialmente, no est√° regresando.
+        hookSmoothPosition = transform.position; // Inicializa la posici√≥n suavizada.
     }
 
     void Update()
     {
-        // LÛgica de disparo.
+        // L√≥gica de disparo.
         if (Input.GetKeyDown(KeyCode.Mouse0) && !isShooting && !isAttached)
         {
             isShooting = true;
@@ -37,7 +37,7 @@ public class Gancho : MonoBehaviour
             hookDirection = (mira.transform.position - transform.position).normalized;
         }
 
-        // LÛgica para soltar la bomba.
+        // L√≥gica para soltar la bomba.
         if (Input.GetKeyDown(KeyCode.Mouse1) && isAttached)
         {
             ReleaseBomb();
@@ -53,12 +53,12 @@ public class Gancho : MonoBehaviour
         {
             ReturnToPlayer();
         }
-        // Gancho se mueve con el mouse tras quedar est·tico.
+        // Gancho se mueve con el mouse tras quedar est√°tico.
         else if (isAttached && attachedBomb != null)
         {
             FollowMira();
         }
-        // Si no interact˙a, regresa al jugador.
+        // Si no interact√∫a, regresa al jugador.
         else if (isReleased)
         {
             transform.position = player.transform.position;
@@ -95,10 +95,10 @@ public class Gancho : MonoBehaviour
             isReleased = true;
         }
 
-        RetÌcula retÌcula = mira.GetComponent<RetÌcula>();
-        if (retÌcula != null)
+        Ret√≠cula ret√≠cula = mira.GetComponent<Ret√≠cula>();
+        if (ret√≠cula != null)
         {
-            retÌcula.SetRadius(retÌcula.maxRadius); // Establece el nuevo radio m·ximo basado en la posiciÛn del gancho.
+            ret√≠cula.SetRadius(ret√≠cula.maxRadius); // Establece el nuevo radio m√°ximo basado en la posici√≥n del gancho.
         }
     }
 
@@ -111,7 +111,7 @@ public class Gancho : MonoBehaviour
 
     void FollowMira()
     {
-        // Movimiento del gancho hacia la posiciÛn de la retÌcula.
+        // Movimiento del gancho hacia la posici√≥n de la ret√≠cula.
         hookSmoothPosition = Vector3.Lerp(hookSmoothPosition, mira.transform.position, followDelay);
         transform.position = hookSmoothPosition;
 
@@ -135,15 +135,22 @@ public class Gancho : MonoBehaviour
             // Calcula la distancia entre el jugador y el gancho.
             float distance = Vector3.Distance(player.transform.position, transform.position);
 
-            // Ajusta el radio m·ximo de la retÌcula a la distancia actual.
-            RetÌcula retÌcula = mira.GetComponent<RetÌcula>();
-            if (retÌcula != null)
+            // Ajusta el radio m√°ximo de la ret√≠cula a la distancia actual.
+            Ret√≠cula ret√≠cula = mira.GetComponent<Ret√≠cula>();
+            if (ret√≠cula != null)
             {
-                retÌcula.SetRadius(distance); // Establece el nuevo radio m·ximo basado en la posiciÛn del gancho.
+                ret√≠cula.SetRadius(distance); // Establece el nuevo radio m√°ximo basado en la posici√≥n del gancho.
             }
 
             MovimientoCamara movCamara = camara.GetComponent<MovimientoCamara>();
             movCamara.ApplyZoom();
+
+            Bombs bomba = collision.gameObject.GetComponent<Bombs>();
+            if (bomba != null)
+            {
+                Debug.Log("Gancho colision√≥ con una bomba.");
+                bomba.AcoplarAlGancho();
+            }
         }
     }
 }
