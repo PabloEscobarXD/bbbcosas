@@ -3,7 +3,7 @@ using UnityEngine;
 public class Retícula : MonoBehaviour
 {
     public Transform player; // Referencia al jugador.
-    public Transform gancho; // Referencia al jugador.
+    public Transform gancho; // Referencia al gancho.
     public Transform spriteTransform; // Transform del sprite que se va a rotar.
     public float radius = 3f; // Radio inicial del círculo.
     public float minRadius = 1f; // Radio mínimo del círculo.
@@ -39,6 +39,9 @@ public class Retícula : MonoBehaviour
 
         // 5. Rota el sprite hacia la retícula.
         RotateSpriteTowardsReticle(direction);
+
+        // 6. Rota el gancho hacia la retícula también con un ángulo extra de 90 grados.
+        RotateGanchoTowardsReticle(direction, 270); // 90 grados de rotación adicional
     }
 
     public void SetRadius(float newRadius)
@@ -53,5 +56,14 @@ public class Retícula : MonoBehaviour
 
         // Aplica la rotación al transform del sprite (en el eje Z).
         spriteTransform.rotation = Quaternion.Euler(0f, 0f, angle);
+    }
+
+    void RotateGanchoTowardsReticle(Vector2 direction, float additionalAngle)
+    {
+        // Calcula el ángulo en grados desde el jugador hacia la retícula.
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        // Aplica la rotación al transform del gancho (en el eje Z) con el ángulo adicional.
+        gancho.rotation = Quaternion.Euler(0f, 0f, angle + additionalAngle);
     }
 }
