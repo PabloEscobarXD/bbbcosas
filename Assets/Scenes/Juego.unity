@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minesPrefab:
-  - {fileID: 526511211}
+  - {fileID: 1893914130}
   - {fileID: 1599538169}
   - {fileID: 840532164}
   - {fileID: 423092301}
@@ -2017,7 +2017,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 252.47108, y: 162}
+  m_AnchoredPosition: {x: 275.75406, y: 167.99997}
   m_SizeDelta: {x: 232.7194, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1852166778
@@ -2054,7 +2054,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 254.71706, y: 157}
+  m_AnchoredPosition: {x: 278, y: 163}
   m_SizeDelta: {x: 195.1686, y: 81.1503}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1852166780
