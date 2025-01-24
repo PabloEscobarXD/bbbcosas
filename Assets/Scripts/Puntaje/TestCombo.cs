@@ -10,6 +10,9 @@ public class TestCombo : MonoBehaviour
     static public int points = 0; // Cantidad de puntos que se suman
     static public int multiCombo = 1;
     private int auxpoint = 0;
+    private int auxpoint2 = 0;
+    private float timer = 0f; // Temporizador
+    public float resetTime = 5f; // Tiempo para reiniciar el combo (en segundos)
     static public bool isComboEnded;
     
 
@@ -29,9 +32,26 @@ public class TestCombo : MonoBehaviour
 
     void Update()
     {
-        //int auxpoint = 0;
-        // Si se presiona la tecla E, sumar puntos, generar explosión y texto flotante
-        // Sumar puntos al puntaje total
+        if (multiCombo > auxpoint)
+        {
+            scoreManager.AddCombo(multiCombo); // Agrega el combo al ScoreManager
+            auxpoint = multiCombo; // Actualiza el último combo procesado
+            timer = 0f; // Reinicia el temporizador
+        }
+        else
+        {
+            // Incrementa el temporizador si no hay cambios
+            timer += Time.deltaTime;
+
+            // Si han pasado 5 segundos, reinicia el combo
+            if (timer >= resetTime)
+            {
+                multiCombo = 0;
+                auxpoint = 0;
+                timer = 0f; // Reinicia el temporizador
+            }
+        }
+
 
         if (points > auxpoint)
         {
@@ -39,6 +59,7 @@ public class TestCombo : MonoBehaviour
             deltaPoints = deltaPoints * multiCombo;
 
             scoreManager.AddScore(deltaPoints); // Suma solo la diferencia al puntaje
+            
             auxpoint = points; // Actualiza `auxpoint` al nuevo valor de `points`
             
 

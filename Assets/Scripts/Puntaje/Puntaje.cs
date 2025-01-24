@@ -8,6 +8,8 @@ public class ScoreManager : MonoBehaviour
     private int score = 0; // Variable que almacena el puntaje
     private string scoreDisplay = "- - - - -"; // Mostrar los guiones iniciales
     public float scoreSpeed = 1f; // Velocidad de incremento del puntaje (mayor valor = más rápido)
+    public TextMeshProUGUI comboText;
+    private int combo = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +22,11 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int points)
     {
         StartCoroutine(AnimateScoreIncrease(score, score + points)); // Inicia la animación de aumento de puntaje
+    }
+
+    public void AddCombo(int points)
+    {
+        comboText.text = "Combo:\n" + "X "+points;
     }
 
     // Llamar a este método cuando quieras restar puntos
