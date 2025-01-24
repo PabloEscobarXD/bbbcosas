@@ -99,7 +99,7 @@ public class MineSpawners : MonoBehaviour
     bool IsOutsideOfScreen(GameObject mine)
     {
         // Obtener los límites de la cámara en el mundo
-        Vector3 screenPosition = maincamera.WorldToViewportPoint(mine.transform.position);
+        Vector3 screenPosition = maincamera.WorldToViewportPoint(mine.transform.position);  
 
         // Verificar si está fuera de la pantalla (fuera del rango [0, 1] en X o Y)
         return screenPosition.x < 0f || screenPosition.x > 1f || screenPosition.y < 0f || screenPosition.y > 1f;

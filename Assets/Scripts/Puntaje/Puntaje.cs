@@ -26,7 +26,7 @@ public class ScoreManager : MonoBehaviour
 
     public void AddCombo(int points)
     {
-        comboText.text = "Combo:\n" + "X "+points;
+        //comboText.text = "Combo:\n" + "X " +points;
     }
 
     // Llamar a este método cuando quieras restar puntos

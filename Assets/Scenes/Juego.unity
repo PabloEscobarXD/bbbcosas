@@ -2757,7 +2757,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreManager: {fileID: 1114182747}
-  explosionPrefab: {fileID: 8574229942988596568, guid: 610b1a5c8c6f1b74bac5231253cde357, type: 3}
   floatingTextPrefab: {fileID: 4672624135531839543, guid: 670d5196f9e6fce4282abdab9514e9a0, type: 3}
   resetTime: 5
 --- !u!114 &1114182747
@@ -3183,9 +3182,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 369893420}
+  reticula: {fileID: 1626761495}
   scriptJugador: {fileID: 369893423}
   smoothTime: 0.15
-  elapsedZoomedOutTIme: 0
+  elapsedZoomedOutTime: 0
 --- !u!114 &1409925212
 MonoBehaviour:
   m_ObjectHideFlags: 0
