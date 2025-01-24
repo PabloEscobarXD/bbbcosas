@@ -27,7 +27,7 @@ public class MineSpawners : MonoBehaviour
         GameObject enemy = Instantiate(minesPrefab[Random.Range(0, minesPrefab.Count)], spawnPosition, Quaternion.identity);
         spawnedMines.Add(enemy); // Añadir la mina recién generada a la lista de minas
 
-        Debug.Log("Mine Spawned: " + enemy);
+        // Debug.Log("Mine Spawned: " + enemy);
 
         // Configurar el Rigidbody2D y BoxCollider2D
         Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();

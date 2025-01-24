@@ -76,8 +76,17 @@ public class Gancho : MonoBehaviour
         }
     }
 
-    void ReleaseBomb()
+    public void ReleaseBomb()
     {
+        if (attachedBomb != null)
+        {
+            Bombs bombScript = attachedBomb.GetComponent<Bombs>();
+            if (bombScript != null)
+            {
+                bombScript.isAttachedToHook = false; // La bomba ya no está en el gancho.
+            }
+        }
+
         isAttached = false;
         attachedBomb = null;
         isShooting = false;
@@ -85,7 +94,8 @@ public class Gancho : MonoBehaviour
         returnTarget = player.transform.position;
     }
 
-    void ReturnToPlayer()
+
+    public void ReturnToPlayer()
     {
         transform.position = Vector3.MoveTowards(transform.position, returnTarget, returnSpeed * Time.deltaTime);
 
@@ -124,13 +134,25 @@ public class Gancho : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("dummy"))
+        if (isReturning)
+            return;
+
+        if (isAttached)
+            return;
+
+        if (isShooting && (collision.gameObject.CompareTag("red") || collision.gameObject.CompareTag("blue") || collision.gameObject.CompareTag("green") || collision.gameObject.CompareTag("yellow")))
         {
-            Debug.Log("DUMMY");
             isShooting = false;
             isAttached = true; // El gancho queda acoplado.
             isReleased = false;
             attachedBomb = collision.gameObject; // La bomba queda acoplada al gancho.
+
+            // Marca la bomba como agarrada por el gancho.
+            Bombs bombScript = attachedBomb.GetComponent<Bombs>();
+            if (bombScript != null)
+            {
+                bombScript.isAttachedToHook = true;
+            }
 
             // Calcula la distancia entre el jugador y el gancho.
             float distance = Vector3.Distance(player.transform.position, transform.position);
@@ -144,13 +166,7 @@ public class Gancho : MonoBehaviour
 
             MovimientoCamara movCamara = camara.GetComponent<MovimientoCamara>();
             movCamara.ApplyZoom();
-
-            Bombs bomba = collision.gameObject.GetComponent<Bombs>();
-            if (bomba != null)
-            {
-                Debug.Log("Gancho colisionó con una bomba.");
-                bomba.AcoplarAlGancho();
-            }
         }
     }
+
 }

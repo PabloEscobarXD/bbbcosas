@@ -3,52 +3,54 @@ using UnityEngine;
 
 public class Bombs : MonoBehaviour
 {
-    public Color color; // Color de la bomba.
-    public bool isAttachedToHook = false; // Si esta bomba está acoplada al gancho.
-    private List<Bombs> connectedBombs = new List<Bombs>(); // Bombas conectadas a esta bomba.
+    private float explosionRadius = 3f;
+    public bool isAttachedToHook;
+    public GameObject explosionPrefab, hook;
 
-    // Método para acoplar la bomba al gancho.
-    public void AcoplarAlGancho()
-    {
-        if (!isAttachedToHook)
-        {
-            isAttachedToHook = true;
-            Debug.Log("La bomba se acopló al gancho.");
-            // Mueve las bombas conectadas junto con esta.
-            ActualizarPosicionDeBombas();
-        }
-    }
-
-    // Método para acoplar una bomba a esta bomba.
-    public void AcoplarOtraBomba(Bombs otraBomba)
-    {
-        if (!connectedBombs.Contains(otraBomba))
-        {
-            connectedBombs.Add(otraBomba);
-            otraBomba.AcoplarAlGancho(); // Marca la otra bomba como acoplada también.
-            Debug.Log("Se acopló otra bomba.");
-        }
-    }
-
-    // Método que mueve todas las bombas conectadas con esta bomba.
-    private void ActualizarPosicionDeBombas()
-    {
-        foreach (Bombs bomba in connectedBombs)
-        {
-            bomba.transform.position = transform.position; // Las mueve a la posición de la bomba principal.
-        }
-    }
-
-    // Método para manejar colisiones.
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Bombs otraBomba = collision.gameObject.GetComponent<Bombs>();
-        if (otraBomba != null && otraBomba.color == color)
+        // Verifica si esta bomba está siendo transportada por el gancho.
+        if (isAttachedToHook)
         {
-            if (isAttachedToHook || otraBomba.isAttachedToHook)
+            Bombs otraBomba = collision.gameObject.GetComponent<Bombs>();
+            if (otraBomba != null && collision.gameObject.CompareTag(gameObject.tag))
             {
-                AcoplarOtraBomba(otraBomba); // Acopla la bomba a la red.
+                Explode(collision);
             }
+        }
+    }
+
+    public void Explode(Collision2D collision)
+    {
+        // Crear la explosión en la posición actual.
+        GameObject explosionInstance = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+        // Obtener el multiplicador de escala de la explosión
+        float scaleMultiplier = Explosion.GetExplosionScaleMultiplier();
+
+        // Configurar el tamaño de la explosión
+        Explosion explosionScript = explosionInstance.GetComponent<Explosion>();
+        if (explosionScript != null)
+        {
+            explosionScript.SetAffectedBombTag(gameObject.tag);
+            explosionScript.SetExplosionScale(scaleMultiplier);  // Establecer la escala de la explosión
+        }
+
+        // Destruir la bomba actual.
+        Destroy(gameObject);
+
+        // Si la colisión proviene de otra bomba, crea una explosión adicional en la posición de la bomba colisionada.
+        if (collision != null)
+        {
+            GameObject otherExplosionInstance = Instantiate(explosionPrefab, collision.gameObject.transform.position, Quaternion.identity);
+            Explosion otherExplosionScript = otherExplosionInstance.GetComponent<Explosion>();
+            if (otherExplosionScript != null)
+            {
+                otherExplosionScript.SetAffectedBombTag(collision.gameObject.tag);
+                otherExplosionScript.SetExplosionScale(scaleMultiplier);  // Establecer la escala de la explosión
+            }
+
+            Destroy(collision.gameObject);
         }
     }
 }
