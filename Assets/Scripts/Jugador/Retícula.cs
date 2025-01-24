@@ -3,6 +3,7 @@ using UnityEngine;
 public class Retícula : MonoBehaviour
 {
     public Transform player; // Referencia al jugador.
+    public Transform gancho; // Referencia al jugador.
     public Transform spriteTransform; // Transform del sprite que se va a rotar.
     public float radius = 3f; // Radio inicial del círculo.
     public float minRadius = 1f; // Radio mínimo del círculo.
@@ -20,7 +21,7 @@ public class Retícula : MonoBehaviour
 
     void Update()
     {
-        if (player == null || spriteTransform == null) return;
+        if (player == null || spriteTransform == null || gancho == null) return;
 
         // 1. Obtén la posición del mouse en el mundo 2D.
         Vector3 worldMousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);

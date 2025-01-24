@@ -17,9 +17,9 @@ public class Gancho : MonoBehaviour
 
     void Start()
     {
-        isShooting = false;
-        isAttached = false;
-        isReleased = true;
+        isShooting = false; //Disparando (Evita el spameo)
+        isAttached = false; //Agarrado
+        isReleased = true;  //Soltado
         attachedBomb = null;
         isReturning = false; // Inicialmente, no está regresando.
         hookSmoothPosition = transform.position; // Inicializa la posición suavizada.
