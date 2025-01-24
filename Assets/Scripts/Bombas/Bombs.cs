@@ -7,6 +7,7 @@ public class Bombs : MonoBehaviour
     private float explosionRadius = 3f;
     public bool isAttachedToHook;
     public GameObject explosionPrefab, hook;
+    public AudioClip explosionAudio;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -57,6 +58,7 @@ public class Bombs : MonoBehaviour
         Destroy(gameObject);
         TestCombo.points += 10;
         Debug.Log("a: " + TestCombo.points);
+        audioManager.Instance.reproducir(explosionAudio);
 
         // Si la colisión proviene de otra bomba, crea una explosión adicional en la posición de la bomba colisionada.
         if (collision != null)
@@ -69,6 +71,7 @@ public class Bombs : MonoBehaviour
                 otherExplosionScript.SetExplosionScale(scaleMultiplier);  // Establecer la escala de la explosión
                 //TestCombo.points++;
                 Debug.Log("a: " + TestCombo.points);
+                //audioManager.Instance.reproducir(explosionAudio);
             }
 
             Destroy(collision.gameObject);

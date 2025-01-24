@@ -8,6 +8,9 @@ public class Gancho : MonoBehaviour
     public float returnSpeed = 15f; // Velocidad al regresar al jugador.
     public float followDelay = 0.2f; // Retraso al seguir la mira.
     public bool isShooting, isAttached, isReleased;
+    public AudioClip ganchoGo;
+    public AudioClip ganchoBack;
+    public AudioClip acopleAudio;
 
     private Vector2 hookDirection;
     private GameObject attachedBomb; // Referencia a la bomba acoplada.
@@ -30,6 +33,7 @@ public class Gancho : MonoBehaviour
         // Lógica de disparo.
         if (Input.GetKeyDown(KeyCode.Mouse0) && !isShooting && !isAttached)
         {
+            audioManager.Instance.reproducir(ganchoGo);
             isShooting = true;
             isReleased = false;
             isReturning = false;
@@ -40,6 +44,7 @@ public class Gancho : MonoBehaviour
         // Lógica para soltar la bomba.
         if (Input.GetKeyDown(KeyCode.Mouse1) && isAttached)
         {
+            audioManager.Instance.reproducir(ganchoBack);
             ReleaseBomb();
         }
 
@@ -97,6 +102,7 @@ public class Gancho : MonoBehaviour
 
     public void ReturnToPlayer()
     {
+        
         transform.position = Vector3.MoveTowards(transform.position, returnTarget, returnSpeed * Time.deltaTime);
 
         if (Vector3.Distance(transform.position, returnTarget) < 0.1f)
@@ -142,6 +148,7 @@ public class Gancho : MonoBehaviour
 
         if (isShooting && (collision.gameObject.CompareTag("red") || collision.gameObject.CompareTag("blue") || collision.gameObject.CompareTag("green") || collision.gameObject.CompareTag("yellow")))
         {
+            audioManager.Instance.reproducir(acopleAudio);
             isShooting = false;
             isAttached = true; // El gancho queda acoplado.
             isReleased = false;

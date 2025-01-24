@@ -1214,6 +1214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60813a8de7a2ead4e8f504f25e0df059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clickSonido: {fileID: 8300000, guid: e1bde7c488104b84582deb585f6411e2, type: 3}
 --- !u!4 &1693216105
 Transform:
   m_ObjectHideFlags: 0
