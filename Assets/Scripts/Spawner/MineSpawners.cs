@@ -9,6 +9,7 @@ public class MineSpawners : MonoBehaviour
     public float offscreenDistance = 2f; // Distancia fuera de la pantalla
     public Camera maincamera;
     public float minDistanceBetweenMines = 2f; // Distancia mínima entre las minas
+    private float elapsedTime;
 
     private List<GameObject> spawnedMines = new List<GameObject>(); // Lista de minas generadas
 
@@ -16,7 +17,16 @@ public class MineSpawners : MonoBehaviour
     void Start()
     {
         // Iniciar el ciclo de generación de minas
+        elapsedTime = 0;
         InvokeRepeating(nameof(SpawnMine), 0f, spawnInterval);
+    }
+    void Update()
+    {
+        elapsedTime += Time.deltaTime;
+        if (elapsedTime >= 2f)
+        {
+            spawnInterval+=5f;
+        }
     }
 
     void SpawnMine()
