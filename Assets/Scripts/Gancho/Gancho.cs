@@ -1,8 +1,9 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Gancho : MonoBehaviour
 {
-    public GameObject player, mira; // Referencia al jugador y a la mira (retícula).
+    public GameObject player, mira, camara; // Referencia al jugador y a la mira (retícula).
     public float hookSpeed = 10f; // Velocidad del gancho.
     public float returnSpeed = 15f; // Velocidad al regresar al jugador.
     public float followDelay = 0.2f; // Retraso al seguir la mira.
@@ -93,6 +94,12 @@ public class Gancho : MonoBehaviour
             isReturning = false;
             isReleased = true;
         }
+
+        Retícula retícula = mira.GetComponent<Retícula>();
+        if (retícula != null)
+        {
+            retícula.SetRadius(retícula.maxRadius); // Establece el nuevo radio máximo basado en la posición del gancho.
+        }
     }
 
     void StopHook()
@@ -134,6 +141,9 @@ public class Gancho : MonoBehaviour
             {
                 retícula.SetRadius(distance); // Establece el nuevo radio máximo basado en la posición del gancho.
             }
+
+            MovimientoCamara movCamara = camara.GetComponent<MovimientoCamara>();
+            movCamara.ApplyZoom();
         }
     }
 }
