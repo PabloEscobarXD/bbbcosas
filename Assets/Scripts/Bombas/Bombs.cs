@@ -14,6 +14,7 @@ public class Bombs : MonoBehaviour
         if(collision.gameObject.tag.Contains("player"))
         {
             Destroy(collision.gameObject);
+            TestCombo.points = 0;
             SceneManager.LoadScene("gameover");
         }
         // Verifica si esta bomba está siendo transportada por el gancho.
