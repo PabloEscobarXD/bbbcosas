@@ -152,6 +152,7 @@ public class Gancho : MonoBehaviour
             if (bombScript != null)
             {
                 bombScript.isAttachedToHook = true;
+                bombScript.hook = gameObject; // Asigna este gancho a la bomba.
             }
 
             // Calcula la distancia entre el jugador y el gancho.

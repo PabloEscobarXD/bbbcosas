@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Bombs : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class Bombs : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.gameObject.tag.Contains("player"))
+        {
+            Destroy(collision.gameObject);
+            SceneManager.LoadScene("gameover");
+        }
         // Verifica si esta bomba está siendo transportada por el gancho.
         if (isAttachedToHook)
         {
@@ -27,6 +33,17 @@ public class Bombs : MonoBehaviour
 
         // Obtener el multiplicador de escala de la explosión
         float scaleMultiplier = Explosion.GetExplosionScaleMultiplier();
+
+        // Notificar al gancho que debe regresar si está transportando esta bomba.
+        if (isAttachedToHook && hook != null)
+        {
+            Debug.Log("Regresando Gancho");
+            Gancho ganchoScript = hook.GetComponent<Gancho>();
+            if (ganchoScript != null)
+            {
+                ganchoScript.ReleaseBomb(); // Nuevo método en el gancho.
+            }
+        }
 
         // Configurar el tamaño de la explosión
         Explosion explosionScript = explosionInstance.GetComponent<Explosion>();
